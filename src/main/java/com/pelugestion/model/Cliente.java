@@ -15,12 +15,12 @@ public class Cliente {
             DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
 
     public static final String[] PROVINCIAS = {
-            "Álava", "Albacete", "Alicante", "Almería", "Asturias", "Ávila",
-            "Badajoz", "Barcelona", "Burgos", "Cáceres", "Cádiz", "Cantabria",
-            "Castellón", "Ceuta", "Ciudad Real", "Córdoba", "A Coruña", "Cuenca",
+            "Alava", "Albacete", "Alicante", "Almeria", "Asturias", "Avila",
+            "Badajoz", "Barcelona", "Burgos", "Caceres", "Cadiz", "Cantabria",
+            "Castellon", "Ceuta", "Ciudad Real", "Cordoba", "A Coruna", "Cuenca",
             "Girona", "Granada", "Guadalajara", "Gipuzkoa", "Huelva", "Huesca",
-            "Illes Balears", "Jaén", "León", "Lleida", "Lugo", "Madrid",
-            "Málaga", "Melilla", "Murcia", "Navarra", "Ourense", "Palencia",
+            "Illes Balears", "Jaen", "Leon", "Lleida", "Lugo", "Madrid",
+            "Malaga", "Melilla", "Murcia", "Navarra", "Ourense", "Palencia",
             "Las Palmas", "Pontevedra", "La Rioja", "Salamanca",
             "Santa Cruz de Tenerife", "Segovia", "Sevilla", "Soria", "Tarragona",
             "Teruel", "Toledo", "Valencia", "Valladolid", "Bizkaia", "Zamora",

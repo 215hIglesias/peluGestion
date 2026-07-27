@@ -28,7 +28,7 @@ public final class CsvUtil {
         String content = new String(bytes, StandardCharsets.UTF_8);
 
         // Quitar BOM UTF-8 si existe
-        if (!content.isEmpty() && content.charAt(0) == '﻿') {
+        if (!content.isEmpty() && content.charAt(0) == '\uFEFF') {
             content = content.substring(1);
         }
 
@@ -41,7 +41,7 @@ public final class CsvUtil {
         char delimiter = ';';
         try (Writer w = new OutputStreamWriter(
                 Files.newOutputStream(file), StandardCharsets.UTF_8)) {
-            w.write('﻿'); // BOM para que Excel detecte UTF-8
+            w.write('\uFEFF'); // BOM para que Excel detecte UTF-8
             for (String[] row : rows) {
                 StringBuilder sb = new StringBuilder();
                 for (int i = 0; i < row.length; i++) {
