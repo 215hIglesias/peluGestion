@@ -1,5 +1,16 @@
 # Changelog
 
+## [1.13.1](https://github.com/215hIglesias/peluGestion/compare/v1.13.0...v1.13.1) (2026-07-27)
+
+
+### Bug Fixes
+
+* cmd shell para fatJar en CI ([7ab34de](https://github.com/215hIglesias/peluGestion/commit/7ab34de72bf8f8686383e3b52a230c79dbb3d800))
+* encoding UTF-8 para compilar en CI ([9f7b942](https://github.com/215hIglesias/peluGestion/commit/9f7b942049630d98bf664644e6ecff71b798c4cd))
+* gradle 8.10.2 + debug fatJar step ([a602d72](https://github.com/215hIglesias/peluGestion/commit/a602d72f938ced0d6d4e00752d0a24c778d60a1a))
+* quitar tildes y BOM literal para compatibilidad windows-1252 ([80252ab](https://github.com/215hIglesias/peluGestion/commit/80252abb07a2fa9c4c30c24b5f2e8d455c0be848))
+* trigger build on tag push + workflow_dispatch ([d8eec59](https://github.com/215hIglesias/peluGestion/commit/d8eec597786d0f79058ec0eedf9ccdf66ac3d5ff))
+
 ## [1.13.0](https://github.com/215hIglesias/peluGestion/compare/v1.12.0...v1.13.0) (2026-07-27)
 
 
