@@ -23,9 +23,13 @@ jobs:
           distribution: 'temurin'
 
       - name: Build fatJar
+        shell: cmd
         run: |
-          java -version
-          cmd /c gradlew.bat fatJar --console=plain --stacktrace
+          java -version 2>&1
+          echo Gradle wrapper properties:
+          type gradle\wrapper\gradle-wrapper.properties
+          echo Building...
+          gradlew.bat fatJar --console=plain --stacktrace 2>&1
 
       - name: Download JRE (BellSoft Liberica 17, 64-bit)
         run: |
