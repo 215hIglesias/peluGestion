@@ -36,6 +36,10 @@ application {
     mainClass.set("com.pelugestion.App")
 }
 
+tasks.withType<JavaCompile> {
+    options.encoding = "UTF-8"
+}
+
 tasks.test {
     useJUnitPlatform()
 }
