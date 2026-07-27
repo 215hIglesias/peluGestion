@@ -23,6 +23,7 @@ import java.nio.file.Path;
 public class App {
 
     public static void main(String[] args) {
+        // FlatLaf + UI global config
         try {
             UIManager.put("Component.arc", 10);
             UIManager.put("Button.arc", 10);
