@@ -4,7 +4,7 @@ plugins {
 }
 
 group = "com.pelugestion"
-version = "1.12"
+version = "1.12.0"
 
 java {
     sourceCompatibility = JavaVersion.VERSION_17
