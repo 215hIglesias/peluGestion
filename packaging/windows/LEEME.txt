@@ -1,0 +1,28 @@
+PeluGestion — Gestion de clientes de peluqueria
+================================================
+
+COMO ABRIR EL PROGRAMA
+----------------------
+Haz doble clic en:  PeluGestion.bat
+
+La primera vez te pedira CREAR una contrasena de acceso.
+Apuntala: se pedira cada vez que abras el programa.
+
+SI NO ABRE
+----------
+Haz doble clic en:  PeluGestion-diagnostico.bat
+Se abrira una ventana negra con el mensaje de error. Envia esa
+captura al desarrollador.
+
+DONDE SE GUARDAN LOS DATOS
+--------------------------
+En tu carpeta de usuario de Windows:
+   C:\Users\TU_USUARIO\AppData\Roaming\PeluGestion\
+
+Ahi estan la base de datos (pelugestion.db) y la carpeta de
+copias de seguridad (backups), que se crean solas al abrir.
+
+REQUISITOS
+----------
+Ninguno. El programa ya lleva su propio Java dentro (carpeta "jre").
+Funciona en Windows de 32 y de 64 bits. No hace falta internet.
