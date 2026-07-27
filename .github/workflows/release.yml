@@ -22,7 +22,7 @@ jobs:
           distribution: 'temurin'
 
       - name: Build fatJar
-        run: .\gradlew.bat fatJar --console=plain --no-daemon
+        run: .\gradlew.bat fatJar --console=plain --no-daemon --stacktrace
 
       - name: Download JRE (BellSoft Liberica 17, 64-bit)
         run: |
