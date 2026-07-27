@@ -1,5 +1,13 @@
 # Changelog
 
+## [1.13.3](https://github.com/215hIglesias/peluGestion/compare/v1.13.2...v1.13.3) (2026-07-27)
+
+
+### Bug Fixes
+
+* jpackage args con array para evitar error de --icon ([85ab65e](https://github.com/215hIglesias/peluGestion/commit/85ab65e7a8f632b2a682da8b7efb3807304f97d6))
+* quitar --icon del jpackage ([f8d00f0](https://github.com/215hIglesias/peluGestion/commit/f8d00f0eee93a0bd85d5e5df99768e1f1cc9e33b))
+
 ## [1.13.2](https://github.com/215hIglesias/peluGestion/compare/v1.13.1...v1.13.2) (2026-07-27)
 
 
