@@ -1,10 +1,8 @@
-name: Release
+name: Build & Release
 
 on:
-  push:
-    branches: [main]
-    tags:
-      - 'v*'
+  release:
+    types: [published]
 
 permissions:
   contents: write
@@ -23,13 +21,6 @@ jobs:
           java-version: '17'
           distribution: 'temurin'
 
-      - name: Extract version
-        id: version
-        run: |
-          $version = Select-String -Path build.gradle.kts -Pattern 'version\s*=\s*"([^"]+)"' | ForEach-Object { $_.Matches.Groups[1].Value }
-          Write-Output "VERSION=$version"
-          echo "VERSION=$version" >> $env:GITHUB_OUTPUT
-
       - name: Build fatJar
         run: .\gradlew.bat fatJar --console=plain --no-daemon
 
@@ -41,11 +32,11 @@ jobs:
           Expand-Archive $jreZip -DestinationPath .
           $jreDir = Get-ChildItem -Directory | Where-Object { $_.Name -match "^(jdk|jre)" } | Select-Object -First 1
           Rename-Item $jreDir.FullName jre-full
-          Write-Output "JRE descargado en jre-full"
 
       - name: Build MSI with jpackage
         run: |
-          $version = "${{ steps.version.outputs.VERSION }}"
+          $tag = "${{ github.event.release.tag_name }}"
+          $version = $tag -replace '^v', ''
           $iconArg = ""
           if (Test-Path "src\main\resources\icon.ico") {
             $iconArg = "--icon src/main/resources/icon.ico"
@@ -64,11 +55,11 @@ jobs:
             --description "Gestion de clientes de peluqueria" `
             --vendor "PeluGestion" `
             $iconArg
-          Write-Output "MSI generado"
 
       - name: Build portable ZIP
         run: |
-          $version = "${{ steps.version.outputs.VERSION }}"
+          $tag = "${{ github.event.release.tag_name }}"
+          $version = $tag -replace '^v', ''
           $stage = "dist\portable\PeluGestion"
           New-Item -ItemType Directory -Force -Path $stage | Out-Null
           Copy-Item "build\libs\PeluGestion-$version-all.jar" $stage
@@ -77,27 +68,20 @@ jobs:
           Copy-Item "packaging\windows\LEEME.txt" $stage
           Copy-Item -Recurse "jre-full" "$stage\jre"
           Compress-Archive -Path $stage -DestinationPath "dist\PeluGestion-Windows-portable.zip" -Force
-          Write-Output "ZIP portable generado"
         continue-on-error: true
 
-      - name: Create GitHub Release
+      - name: Upload MSI to Release
         uses: softprops/action-gh-release@v2
         with:
-          files: |
-            dist/*.msi
-            dist/*.zip
-          tag_name: v${{ steps.version.outputs.VERSION }}
-          name: "PeluGestion v${{ steps.version.outputs.VERSION }}"
-          body: |
-            ## PeluGestion v${{ steps.version.outputs.VERSION }}
+          files: dist/*.msi
+          tag_name: ${{ github.event.release.tag_name }}
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-            ### Windows
-            - **Instalador**: `PeluGestion-${{ steps.version.outputs.VERSION }}.msi` — doble clic, siguiente-siguiente, listo.
-            - **Portable**: `PeluGestion-Windows-portable.zip` — descomprimir y ejecutar `PeluGestion.bat`.
-
-            El programa incluye su propio Java, no necesita instalar nada mas.
-          draft: false
-          prerelease: false
-          generate_release_notes: true
+      - name: Upload ZIP to Release
+        uses: softprops/action-gh-release@v2
+        with:
+          files: dist/*.zip
+          tag_name: ${{ github.event.release.tag_name }}
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
