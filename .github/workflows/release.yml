@@ -38,24 +38,25 @@ jobs:
         run: |
           $tag = "${{ github.ref_name }}"
           $version = $tag -replace '^v', ''
-          $iconArg = ""
+          $jpackageArgs = @(
+            "--type", "msi",
+            "--name", "PeluGestion",
+            "--app-version", $version,
+            "--input", "build\libs",
+            "--main-jar", "PeluGestion-$version-all.jar",
+            "--runtime-image", "jre-full",
+            "--dest", "dist",
+            "--win-shortcut",
+            "--win-menu",
+            "--win-menu-group", "PeluGestion",
+            "--win-dir-chooser",
+            "--description", "Gestion de clientes de peluqueria",
+            "--vendor", "PeluGestion"
+          )
           if (Test-Path "src\main\resources\icon.ico") {
-            $iconArg = "--icon src/main/resources/icon.ico"
+            $jpackageArgs += @("--icon", "src\main\resources\icon.ico")
           }
-          jpackage --type msi `
-            --name PeluGestion `
-            --app-version $version `
-            --input build\libs `
-            --main-jar "PeluGestion-$version-all.jar" `
-            --runtime-image jre-full `
-            --dest dist `
-            --win-shortcut `
-            --win-menu `
-            --win-menu-group "PeluGestion" `
-            --win-dir-chooser `
-            --description "Gestion de clientes de peluqueria" `
-            --vendor "PeluGestion" `
-            $iconArg
+          & jpackage @jpackageArgs
 
       - name: Build portable ZIP
         run: |
