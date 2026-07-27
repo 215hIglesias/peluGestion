@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.13.2](https://github.com/215hIglesias/peluGestion/compare/v1.13.1...v1.13.2) (2026-07-27)
+
+
+### Bug Fixes
+
+* encoding windows-1252 y tildes ([1140ee7](https://github.com/215hIglesias/peluGestion/commit/1140ee77b99363e7fb79a50ad41a3dfead5c6847))
+
 ## [1.13.1](https://github.com/215hIglesias/peluGestion/compare/v1.13.0...v1.13.1) (2026-07-27)
 
 
