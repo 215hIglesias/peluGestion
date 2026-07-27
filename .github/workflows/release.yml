@@ -38,15 +38,15 @@ jobs:
         run: |
           $tag = "${{ github.ref_name }}"
           $version = $tag -replace '^v', ''
-          jpackage --type msi --name PeluGestion --app-version $version --input build\libs --main-jar PeluGestion-$version-all.jar --runtime-image jre-full --dest dist --win-shortcut --win-menu --win-menu-group PeluGestion --win-dir-chooser --description "Gestion de clientes de peluqueria" --vendor PeluGestion
+          $jar = Get-ChildItem build\libs\PeluGestion-*-all.jar | Select-Object -First 1
+          jpackage --type msi --name PeluGestion --app-version $version --input build\libs --main-jar $($jar.Name) --runtime-image jre-full --dest dist --win-shortcut --win-menu --win-menu-group PeluGestion --win-dir-chooser --description "Gestion de clientes de peluqueria" --vendor PeluGestion
 
       - name: Build portable ZIP
         run: |
-          $tag = "${{ github.ref_name }}"
-          $version = $tag -replace '^v', ''
+          $jar = Get-ChildItem build\libs\PeluGestion-*-all.jar | Select-Object -First 1
           $stage = "dist\portable\PeluGestion"
           New-Item -ItemType Directory -Force -Path $stage | Out-Null
-          Copy-Item "build\libs\PeluGestion-$version-all.jar" $stage
+          Copy-Item $jar.FullName $stage
           Copy-Item "packaging\windows\PeluGestion.bat" $stage
           Copy-Item "packaging\windows\PeluGestion-diagnostico.bat" $stage
           Copy-Item "packaging\windows\LEEME.txt" $stage
