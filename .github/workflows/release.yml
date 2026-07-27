@@ -1,8 +1,9 @@
 name: Build & Release
 
 on:
-  release:
-    types: [published]
+  push:
+    tags: ['v*']
+  workflow_dispatch:
 
 permissions:
   contents: write
@@ -35,7 +36,7 @@ jobs:
 
       - name: Build MSI with jpackage
         run: |
-          $tag = "${{ github.event.release.tag_name }}"
+          $tag = "${{ github.ref_name }}"
           $version = $tag -replace '^v', ''
           $iconArg = ""
           if (Test-Path "src\main\resources\icon.ico") {
@@ -58,7 +59,7 @@ jobs:
 
       - name: Build portable ZIP
         run: |
-          $tag = "${{ github.event.release.tag_name }}"
+          $tag = "${{ github.ref_name }}"
           $version = $tag -replace '^v', ''
           $stage = "dist\portable\PeluGestion"
           New-Item -ItemType Directory -Force -Path $stage | Out-Null
@@ -70,18 +71,12 @@ jobs:
           Compress-Archive -Path $stage -DestinationPath "dist\PeluGestion-Windows-portable.zip" -Force
         continue-on-error: true
 
-      - name: Upload MSI to Release
+      - name: Upload assets to Release
         uses: softprops/action-gh-release@v2
         with:
-          files: dist/*.msi
-          tag_name: ${{ github.event.release.tag_name }}
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
-      - name: Upload ZIP to Release
-        uses: softprops/action-gh-release@v2
-        with:
-          files: dist/*.zip
-          tag_name: ${{ github.event.release.tag_name }}
+          files: |
+            dist/*.msi
+            dist/*.zip
+          tag_name: ${{ github.ref_name }}
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
