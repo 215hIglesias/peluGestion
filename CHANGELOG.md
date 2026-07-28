@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.13.4](https://github.com/215hIglesias/peluGestion/compare/v1.13.3...v1.13.4) (2026-07-27)
+
+
+### Bug Fixes
+
+* usar wildcard para encontrar el JAR real ([faa6f74](https://github.com/215hIglesias/peluGestion/commit/faa6f744b1b1ac5abaa8f4f0ab81b30910566fc8))
+
 ## [1.13.3](https://github.com/215hIglesias/peluGestion/compare/v1.13.2...v1.13.3) (2026-07-27)
 
 
